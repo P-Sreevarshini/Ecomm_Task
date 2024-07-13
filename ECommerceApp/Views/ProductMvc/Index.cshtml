@@ -1,0 +1,41 @@
+@model IEnumerable<ECommerceApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+@Html.AntiForgeryToken()
+
+
+<h1>Product List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Category</td>
+                <td>
+                    @* <a asp-controller="ProductMvc" asp-action="Details" asp-route-id="@product.ProductId">Details</a> | *@
+                    <a asp-controller="ProductMvc" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a> |
+                    <a asp-controller="ProductMvc" asp-action="Delete" asp-route-id="@product.ProductId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="ProductMvc" asp-action="Create" class="btn btn-primary">Add Product</a>
